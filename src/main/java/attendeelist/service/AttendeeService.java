@@ -17,7 +17,17 @@ public class AttendeeService {
 	public static String createJsonFile(Attendees attendees) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-		String result = gson.toJson(attendees);
+		String eventoGeral = "\"%s\" : { \n %s }";
+		String especifico = " \"%s\" : { \n\t \"nome\" : \"%s\", \n\t \"id\" : \"%s\" \n },\n";
+		
+		String result = "";
+		
+		for (Attendee atendee :  attendees.getEvent().getAttendee()){
+			result += String.format(especifico, atendee.getEmail(),atendee.getName(),atendee.getId());
+		}
+		
+		result = String.format(eventoGeral, attendees.getEvent().getId(),result);
+		
 		System.out.println(result);
 		return result;
 	}

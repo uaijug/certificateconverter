@@ -25,7 +25,8 @@ public class SystemUtils {
 
 	public static void writeResultFile(File file, String result) {
 
-		try (FileWriter fw = new FileWriter(file)) {
+		try {
+			FileWriter fw = new FileWriter(file); 
 			fw.write(result);
 			fw.flush();
 		} catch (IOException ex) {
